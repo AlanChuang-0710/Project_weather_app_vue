@@ -1,24 +1,9 @@
-# function_weather_app
+Whole project is built based on weatherapi.
 
-## Project setup
-```
-npm install
-```
+<!-- https://www.weatherapi.com/ -->
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Photos used were downloaded from Unsplash.com
 
-### Compiles and minifies for production
-```
-npm run build
-```
+<!-- https://unsplash.com/ -->
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+The file was created on 24 Dec 2022 by Alan Chuang.
