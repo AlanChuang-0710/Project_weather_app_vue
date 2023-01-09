@@ -12,9 +12,11 @@ Project_weather_app_vue
 2. API串接
 3. 背景圖片隨返回數據轉換
 
-天氣數據來源: https://www.weatherapi.com/
-圖片來源: https://unsplash.com/
-建立日期: 24 Dec 2022
+
+備註: 
+1. 天氣數據來源: https://www.weatherapi.com/
+2. 圖片來源: https://unsplash.com/
+3. 建立日期: 24 Dec 2022
 
 僅供學習使用，無任何商業用途
 
