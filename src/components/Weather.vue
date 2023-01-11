@@ -18,6 +18,10 @@
           <div class="pm-2_5">{{ pm25 }}</div>
           <div class="so-2">{{ so2 }}</div>
         </div>
+        <div class="epa-index">EPA index: {{ epaIndex }}</div>
+        <div class="epa-meaning">
+          EPA index is measured on a scale of 1 to 6, larger number means worse air quality.
+        </div>
       </section>
     </div>
   </main>
@@ -38,6 +42,7 @@ export default {
       searchDate: "",
       pm25: "",
       so2: "",
+      epaIndex: "",
     };
   },
   methods: {
@@ -51,6 +56,7 @@ export default {
           },
         })
         .then(({ data }) => {
+          console.log(data);
           this.searchLocation = data.location.name + " " + data.location.country;
           let tempDate = new Date(data.location.localtime).toString();
           //string才能調用match，返回值為數組。 有g則返回所有匹配的结果，但不會返回捕獲組
@@ -61,13 +67,15 @@ export default {
           this.weatherDp = data.current.condition.text;
           this.pm25 = data.current.air_quality.pm2_5.toFixed(2);
           this.so2 = data.current.air_quality.so2.toFixed(2);
+          this.keyWord = "";
+          this.epaIndex = data.current.air_quality["us-epa-index"];
         })
         .catch((err) => {
           if (err) {
-            alert("There is no such location. Please try again!");
+            alert(`There is no location called "${this.keyWord}". Please try again!`);
+            this.keyWord = "";
           }
         });
-      this.keyWord = "";
     },
   },
   mounted() {
@@ -78,6 +86,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+* {
+  color: white;
+}
+
 main {
   transition: all 1s;
   margin: 100px auto;
@@ -116,6 +128,7 @@ main.warm {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   opacity: 0.8;
   transition: 0.4s;
+  color: #000;
 }
 .search:focus {
   border-radius: 12px 0 12px 0;
@@ -129,7 +142,6 @@ main.warm {
 }
 .demo-area > div:first-child {
   margin-bottom: 20px;
-  color: white;
 }
 .demo-area .location {
   font-size: 2rem;
@@ -145,7 +157,6 @@ main.warm {
   /* width: 120px; */
   margin: 0 auto 20px;
   border-radius: 10px;
-  color: white;
   background-color: rgba(255, 255, 255, 0.35);
   text-shadow: 2px 3px rgba(0, 0, 0, 0.5);
   box-shadow: 2px 3px rgba(0, 0, 0, 0.4);
@@ -155,7 +166,6 @@ main.warm {
   font-size: 27px;
   /* font-style: italic; */
   font-weight: 900;
-  color: white;
   text-shadow: 2px 1px rgba(0, 0, 0, 0.7);
 }
 
@@ -168,12 +178,12 @@ main.warm {
 .air-quality div {
   margin-top: 30px;
   border-radius: 10px;
-  color: white;
   background-color: rgba(255, 255, 255, 0.35);
   text-shadow: 2px 3px rgba(0, 0, 0, 0.5);
   box-shadow: 2px 3px rgba(0, 0, 0, 0.4);
   padding: 5px;
   position: relative;
+  margin-right: 5px;
 }
 
 .pm-2_5::after {
@@ -196,5 +206,24 @@ main.warm {
   position: absolute;
   bottom: -20px;
   left: 2px;
+}
+
+.epa-index {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.35);
+  text-shadow: 2px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 3px rgba(0, 0, 0, 0.4);
+  padding: 5px;
+  font-size: 27px;
+  margin-top: 50px;
+}
+
+.epa-meaning {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  text-shadow: none;
+  /* text-align: start; */
+  line-height: 18px;
 }
 </style>
