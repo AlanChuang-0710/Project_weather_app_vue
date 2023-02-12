@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       api_key: "185c74293df340139a412341222412",
-      url_base: "http://api.weatherapi.com/v1",
+      url_base: "https://api.weatherapi.com/v1",
       keyWord: "",
       temperature: undefined,
       weatherDp: "",
